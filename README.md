@@ -1,63 +1,72 @@
 # مركز نعمة رسام للأبحاث والدراسات
 
-هذا مشروع موقع ثابت احترافي لـ **مركز نعمة رسام للأبحاث والدراسات**.
+هذا مشروع موقع ثابت احترافي وجاهز للنشر على GitHub Pages لـ **مركز نعمة رسام للأبحاث والدراسات**.
 
 ## طريقة التشغيل محليًا
 
 افتح ملف `index.html` مباشرة في المتصفح، أو استخدم إضافة Live Server في VS Code.
 
-## طريقة النشر
+## طريقة الرفع إلى GitHub
 
-يمكن رفع الملفات إلى:
-- GitHub Pages
-- Netlify
-- Vercel
-- أي استضافة Static Hosting
+بعد فك الضغط، ادخل داخل مجلد المشروع وارفع **كل المحتويات** إلى المستودع، وليس ملف ZIP.
 
-## تعديل بيانات التواصل
+يجب أن تظهر في GitHub هذه الملفات والمجلدات في الجذر:
 
-افتح ملف:
-`contact.html`
+```text
+index.html
+about.html
+research.html
+ai-technology.html
+education-rd.html
+consulting.html
+academy.html
+publications.html
+projects.html
+events.html
+partners.html
+contact.html
+css/
+js/
+assets/
+README.md
+```
 
-وابحث عن:
+## تفعيل GitHub Pages
+
+Settings → Pages → Deploy from a branch → main → /root → Save
+
+الرابط المتوقع:
+`https://USERNAME.github.io/namah-rassam-center/`
+
+## تعديل البريد
+
+البريد الافتراضي:
 `info@namahrassam.org`
 
-ثم استبدله بالبريد الحقيقي للمركز.
-
-## الصور الاختيارية المقترحة
-
-الموقع يعمل بدون صور خارجية، لكن يمكنك لاحقًا رفع الصور التالية في المسار `assets/images/`:
-
-- `logo.png` شعار المركز الرسمي.
-- `hero-center.jpg` صورة رئيسية تعبّر عن البحث والذكاء الاصطناعي.
-- `about-center.jpg` صورة عن المركز أو الفريق.
-- `research-lab.jpg` صورة أبحاث ودراسات.
-- `ai-technology.jpg` صورة ذكاء اصطناعي وتقنية.
-- `education-rd.jpg` صورة تدريب وتعليم.
-- `consulting.jpg` صورة اجتماع/استشارة.
-- `academy.jpg` صورة تدريب.
-- `projects-innovation.jpg` صورة مشاريع وابتكار.
-- `events-forum.jpg` صورة فعالية أو منتدى.
-- `partners.jpg` صورة شراكات.
-
-## الملفات الأساسية
-
-- `index.html`
-- `about.html`
-- `research.html`
-- `ai-technology.html`
-- `education-rd.html`
-- `consulting.html`
-- `academy.html`
-- `publications.html`
-- `projects.html`
-- `events.html`
-- `partners.html`
+عدله في:
 - `contact.html`
-- `css/style.css`
 - `js/main.js`
-- `assets/icons/*.svg`
+
+## الصور المضمنة
+
+تم تضمين الصور التالية داخل `assets/images/`:
+
+- `logo.png`
+- `logo-header.png`
+- `logo-footer.png`
+- `favicon.png`
+- `favicon.ico`
+- `hero-center.jpg`
+- `about-center.jpg`
+- `research-lab.jpg`
+- `ai-technology.jpg`
+- `education-rd.jpg`
+- `consulting.jpg`
+- `academy.jpg`
+- `projects-innovation.jpg`
+- `events-forum.jpg`
+- `partners.jpg`
 
 ## ملاحظة
 
-هذه نسخة تأسيسية متقدمة لموقع ثابت. لا تحتوي على قاعدة بيانات أو لوحة تحكم. يمكن تطويرها لاحقًا إلى React/Next.js أو إضافة Backend.
+هذه نسخة ثابتة Static Website، لا تحتاج قاعدة بيانات ولا خادم Backend.

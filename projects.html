@@ -3,9 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>مركز نعمة رسام للأبحاث والدراسات</title>
+  <title>المشاريع | مركز نعمة رسام للأبحاث والدراسات</title>
   <meta name="description" content="مركز بحثي وتقني وتعليمي واستشاري متعدد التخصصات في البحث العلمي، الذكاء الاصطناعي، التكنولوجيا، التعليم، التطوير، الابتكار، والاستشارات." />
   <meta name="theme-color" content="#0B1F3A" />
+  <meta property="og:title" content="مركز نعمة رسام للأبحاث والدراسات" />
+  <meta property="og:description" content="بحثٌ للمعرفة، تقنيةٌ للأثر، وتعليمٌ للمستقبل." />
+  <meta property="og:type" content="website" />
+  <link rel="icon" href="assets/images/favicon.ico" />
+  <link rel="apple-touch-icon" href="assets/images/favicon.png" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
@@ -14,123 +19,108 @@
   <header class="site-header" id="siteHeader">
     <div class="container nav-shell">
       <a class="brand" href="index.html" aria-label="مركز نعمة رسام للأبحاث والدراسات">
-        <span class="brand-mark">NR</span>
-        <span class="brand-text">
-          <strong>مركز نعمة رسام للأبحاث والدراسات</strong>
-          <small>Na’mah Rassam Center for Research, Studies, Technology & Innovation</small>
-        </span>
+        <img class="brand-logo" src="assets/images/logo-header.png" alt="مركز نعمة رسام للأبحاث والدراسات" />
       </a>
 
-      <button class="menu-toggle" id="menuToggle" aria-label="فتح القائمة" aria-expanded="false" aria-controls="mainNav">
+      <button class="menu-toggle" id="menuToggle" type="button" aria-label="فتح القائمة" aria-expanded="false" aria-controls="mainNav">
         <span></span><span></span><span></span>
       </button>
 
       <nav class="main-nav" id="mainNav" aria-label="القائمة الرئيسية">
-        <a class="nav-link" href="index.html">الرئيسية</a>
-<a class="nav-link" href="about.html">عن المركز</a>
-<a class="nav-link" href="research.html">الأبحاث</a>
-<a class="nav-link" href="ai-technology.html">الذكاء الاصطناعي والتقنية</a>
-<a class="nav-link" href="education-rd.html">التعليم والتطوير</a>
-<a class="nav-link" href="consulting.html">الاستشارات</a>
-<a class="nav-link" href="academy.html">الأكاديمية</a>
-<a class="nav-link" href="publications.html">المنشورات</a>
-<a class="nav-link active" href="projects.html">المشاريع</a>
-<a class="nav-link" href="events.html">الفعاليات</a>
-<a class="nav-link" href="partners.html">الشراكات</a>
-<a class="nav-link" href="contact.html">تواصل</a>
+          <a class="nav-link" href="index.html">الرئيسية</a>
+          <a class="nav-link" href="about.html">عن المركز</a>
+          <a class="nav-link" href="research.html">الأبحاث</a>
+          <a class="nav-link" href="ai-technology.html">الذكاء الاصطناعي والتقنية</a>
+          <a class="nav-link" href="education-rd.html">التعليم والتطوير</a>
+          <a class="nav-link" href="consulting.html">الاستشارات</a>
+          <a class="nav-link" href="academy.html">الأكاديمية</a>
+          <a class="nav-link" href="publications.html">المنشورات</a>
+          <a class="nav-link active" href="projects.html">المشاريع</a>
+          <a class="nav-link" href="events.html">الفعاليات</a>
+          <a class="nav-link" href="partners.html">الشراكات</a>
+          <a class="nav-link" href="contact.html">تواصل</a>
       </nav>
     </div>
   </header>
+
   <main id="main">
 
-<section class="page-hero">
-  <div class="container">
-    <span class="eyebrow">Projects & Innovation</span>
-    <h1>المشاريع والابتكارات</h1>
-    <p>مساحة لعرض النماذج الأولية، مشاريع AI، IoT، الإلكترونيات، الروبوتات، والدراسات التطبيقية.</p>
+<section class="page-hero page-hero-image" style="--page-image: url('../assets/images/projects-innovation.jpg')">
+  <div class="container page-hero-grid">
+    <div class="reveal">
+      <span class="eyebrow">Projects & Innovation</span>
+      <h1>المشاريع والابتكارات</h1>
+      <p>مساحة لعرض النماذج الأولية، مشاريع AI، IoT، الإلكترونيات، الروبوتات، والدراسات التطبيقية.</p>
+    </div>
+    <div class="page-hero-card reveal" aria-hidden="true">
+      <span>بحثٌ للمعرفة، تقنيةٌ للأثر، وتعليمٌ للمستقبل.</span>
+    </div>
   </div>
 </section>
 
 <section class="section">
   <div class="container">
     <div class="filter-bar reveal" data-filter-group="projects">
-      <button class="filter-btn active" data-filter="all">الكل</button>
-      <button class="filter-btn" data-filter="ai">ذكاء اصطناعي</button>
-      <button class="filter-btn" data-filter="iot">IoT</button>
-      <button class="filter-btn" data-filter="robotics">روبوتات</button>
-      <button class="filter-btn" data-filter="education">تعليم</button>
+      <button class="filter-btn active" type="button" data-filter="all">الكل</button>
+      <button class="filter-btn" type="button" data-filter="ai">ذكاء اصطناعي</button>
+      <button class="filter-btn" type="button" data-filter="iot">IoT</button>
+      <button class="filter-btn" type="button" data-filter="robotics">روبوتات</button>
+      <button class="filter-btn" type="button" data-filter="education">تعليم</button>
     </div>
-
     <div class="project-grid">
-      <article class="project-card reveal filter-item" data-category="ai">
-        <div class="project-visual">AI</div><h2>نموذج تصنيف صور تعليمي</h2><p>مشروع تدريبي لتعليم مبادئ Computer Vision بطريقة عملية.</p>
-      </article>
-      <article class="project-card reveal filter-item" data-category="iot">
-        <div class="project-visual">IoT</div><h2>نظام مراقبة بيئي بالـ ESP32</h2><p>نموذج أولي لقياس الحرارة والرطوبة وإرسال البيانات.</p>
-      </article>
-      <article class="project-card reveal filter-item" data-category="robotics">
-        <div class="project-visual">BOT</div><h2>ذراع روبوت تعليمي</h2><p>مشروع روبوتات يدمج التحكم، الإلكترونيات، والبرمجة.</p>
-      </article>
-      <article class="project-card reveal filter-item" data-category="education">
-        <div class="project-visual">STEM</div><h2>منهج STEM قائم على المشاريع</h2><p>حزمة أنشطة تعليمية قابلة للتطبيق في المدارس والمراكز.</p>
-      </article>
+      <article class="project-card reveal filter-item" data-category="ai"><img src="assets/images/ai-technology.jpg" alt="مشروع ذكاء اصطناعي" /><h2>نموذج تصنيف صور تعليمي</h2><p>مشروع تدريبي لتعليم مبادئ Computer Vision بطريقة عملية.</p></article>
+      <article class="project-card reveal filter-item" data-category="iot"><img src="assets/images/projects-innovation.jpg" alt="مشروع إنترنت الأشياء" /><h2>نظام مراقبة بيئي بالـ ESP32</h2><p>نموذج أولي لقياس الحرارة والرطوبة وإرسال البيانات.</p></article>
+      <article class="project-card reveal filter-item" data-category="robotics"><img src="assets/images/projects-innovation.jpg" alt="مشروع روبوتات" /><h2>ذراع روبوت تعليمي</h2><p>مشروع روبوتات يدمج التحكم، الإلكترونيات، والبرمجة.</p></article>
+      <article class="project-card reveal filter-item" data-category="education"><img src="assets/images/education-rd.jpg" alt="مشروع STEM" /><h2>منهج STEM قائم على المشاريع</h2><p>حزمة أنشطة تعليمية قابلة للتطبيق في المدارس والمراكز.</p></article>
     </div>
   </div>
 </section>
 
 <section class="section muted">
   <div class="container">
-    <div class="section-head reveal">
-      <span class="section-kicker">Innovation Pipeline</span>
-      <h2>مسار تحويل الفكرة إلى أثر</h2>
-    </div>
-    <div class="pipeline reveal">
-      <span>Idea</span><span>Research</span><span>Prototype</span><span>Testing</span><span>Report</span><span>Impact</span>
-    </div>
+    <div class="section-head reveal"><span class="section-kicker">Innovation Pipeline</span><h2>مسار تحويل الفكرة إلى أثر</h2></div>
+    <div class="pipeline reveal"><span>Idea</span><span>Research</span><span>Prototype</span><span>Testing</span><span>Report</span><span>Impact</span></div>
   </div>
 </section>
 
   </main>
 
-  <button class="back-to-top" id="backToTop" aria-label="العودة إلى الأعلى">↑</button>
+  <button class="back-to-top" id="backToTop" type="button" aria-label="العودة إلى الأعلى">↑</button>
 
   <footer class="site-footer">
     <div class="container footer-grid">
-      <div>
+      <section>
         <a class="footer-brand" href="index.html">
-          <span class="brand-mark">NR</span>
-          <span>
-            <strong>مركز نعمة رسام للأبحاث والدراسات</strong>
-            <small>Na’mah Rassam Center for Research, Studies, Technology & Innovation</small>
-          </span>
+          <img src="assets/images/logo-footer.png" alt="مركز نعمة رسام للأبحاث والدراسات" />
         </a>
         <p>بحثٌ للمعرفة، تقنيةٌ للأثر، وتعليمٌ للمستقبل.</p>
-      </div>
+        <p class="footer-en">Research for Knowledge, Technology for Impact, Education for the Future.</p>
+      </section>
 
-      <div>
-        <h3>محاور المركز</h3>
+      <section>
+        <h2>محاور المركز</h2>
         <ul>
           <li>الأبحاث والدراسات</li>
           <li>الذكاء الاصطناعي والتقنية</li>
           <li>التعليم والبحث والتطوير</li>
           <li>الاستشارات وبناء القدرات</li>
         </ul>
-      </div>
+      </section>
 
-      <div>
-        <h3>تواصل سريع</h3>
+      <section>
+        <h2>روابط سريعة</h2>
         <ul>
-          <li><a href="contact.html">نموذج التواصل</a></li>
+          <li><a href="consulting.html">الخدمات الاستشارية</a></li>
+          <li><a href="academy.html">أكاديمية التدريب</a></li>
           <li><a href="publications.html">المنشورات</a></li>
-          <li><a href="academy.html">برامج الأكاديمية</a></li>
-          <li><a href="projects.html">المشاريع والابتكارات</a></li>
+          <li><a href="contact.html">تواصل معنا</a></li>
         </ul>
-      </div>
+      </section>
     </div>
 
     <div class="container footer-bottom">
-      <span>© 2026 مركز نعمة رسام للأبحاث والدراسات. جميع الحقوق محفوظة.</span>
-      <span>Designed as a professional static website starter.</span>
+      <span>© <span id="year">2026</span> مركز نعمة رسام للأبحاث والدراسات. جميع الحقوق محفوظة.</span>
+      <span>Static website ready for GitHub Pages.</span>
     </div>
   </footer>
 

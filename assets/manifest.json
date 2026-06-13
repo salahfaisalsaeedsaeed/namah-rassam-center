@@ -1,0 +1,50 @@
+{
+  "pages": [
+    "index.html",
+    "about.html",
+    "research.html",
+    "ai-technology.html",
+    "education-rd.html",
+    "consulting.html",
+    "academy.html",
+    "publications.html",
+    "projects.html",
+    "events.html",
+    "partners.html",
+    "contact.html"
+  ],
+  "css": [
+    "css/style.css"
+  ],
+  "js": [
+    "js/main.js"
+  ],
+  "images": [
+    "about-center.jpg",
+    "academy.jpg",
+    "ai-technology.jpg",
+    "consulting.jpg",
+    "education-rd.jpg",
+    "events-forum.jpg",
+    "favicon.ico",
+    "favicon.png",
+    "hero-center.jpg",
+    "logo-footer.png",
+    "logo-header.png",
+    "logo.png",
+    "partners.jpg",
+    "projects-innovation.jpg",
+    "research-lab.jpg"
+  ],
+  "icons": [
+    "ai.svg",
+    "consulting.svg",
+    "data.svg",
+    "education.svg",
+    "ethics.svg",
+    "innovation.svg",
+    "research.svg",
+    "technology.svg",
+    "training.svg"
+  ]
+}

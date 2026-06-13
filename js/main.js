@@ -7,12 +7,8 @@
   const backToTop = document.getElementById("backToTop");
 
   function onScroll() {
-    if (header) {
-      header.classList.toggle("scrolled", window.scrollY > 8);
-    }
-    if (backToTop) {
-      backToTop.classList.toggle("visible", window.scrollY > 520);
-    }
+    if (header) header.classList.toggle("scrolled", window.scrollY > 8);
+    if (backToTop) backToTop.classList.toggle("visible", window.scrollY > 520);
   }
 
   window.addEventListener("scroll", onScroll);
@@ -41,25 +37,18 @@
 
   const revealItems = document.querySelectorAll(".reveal");
   if ("IntersectionObserver" in window) {
-    const observer = new IntersectionObserver(
-      function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("in-view");
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.12 }
-    );
+    const observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("in-view");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
 
-    revealItems.forEach(function (item) {
-      observer.observe(item);
-    });
+    revealItems.forEach(function (item) { observer.observe(item); });
   } else {
-    revealItems.forEach(function (item) {
-      item.classList.add("in-view");
-    });
+    revealItems.forEach(function (item) { item.classList.add("in-view"); });
   }
 
   document.querySelectorAll(".filter-bar").forEach(function (bar) {
@@ -71,9 +60,7 @@
       button.addEventListener("click", function () {
         const filter = button.getAttribute("data-filter");
 
-        buttons.forEach(function (btn) {
-          btn.classList.remove("active");
-        });
+        buttons.forEach(function (btn) { btn.classList.remove("active"); });
         button.classList.add("active");
 
         items.forEach(function (item) {
@@ -84,6 +71,9 @@
       });
     });
   });
+
+  const year = document.getElementById("year");
+  if (year) year.textContent = String(new Date().getFullYear());
 
   const contactForm = document.getElementById("contactForm");
   if (contactForm) {
@@ -99,7 +89,6 @@
         const error = input.parentElement.querySelector(".error");
         const value = input.value.trim();
         data[id] = value;
-
         error.textContent = "";
 
         if (!value) {
