@@ -4,6 +4,10 @@
 
 This directory stores **lawfully shareable copies** of published research papers intended to be linked from the center's bilingual Publications pages.
 
+**حالة الأوراق الحالية (13 نوفمبر 2026):** أكد صاحب الموقع أن ملفات PDF التسعة المرفوعة حاليًا مرخّص بإتاحتها للعرض العام. هذا التأكيد صادر من صاحب الموقع، ولم تُجرَ مراجعة مستقلة لاتفاقيات الناشر لكل ملف.
+
+**Current files (13 November 2026):** The website owner confirms that the nine PDFs currently hosted here are authorized for public viewing. Individual publisher license terms have not been independently audited. Future uploads must be checked against their applicable permissions.
+
 ## طريقة رفع الأوراق | Upload instructions
 
 1. افتح هذا المجلد على GitHub، ثم اختر **Add file → Upload files**.
