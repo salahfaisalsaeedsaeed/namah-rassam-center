@@ -1,0 +1,59 @@
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><meta name="theme-color" content="#102640"><title>محرر بيانات الموقع | Content Draft Editor</title><link rel="stylesheet" href="/css/style.css"><link rel="stylesheet" href="/css/upgrade.css"></head>
+<body class="up-detail"><a class="skip-link" href="#main">تجاوز إلى المحتوى</a><header class="up-navbar"><div class="container up-nav-row"><a class="up-brand" href="/"><img src="/assets/images/logo-header.png" width="60" height="54" alt=""><strong>محرر بيانات الموقع التجريبي</strong></a><nav><a href="/">الموقع الرئيسي</a><a href="/publications.html">المنشورات</a><a href="/opportunities.html">الفرص</a></nav></div></header>
+<main id="main" class="up-admin"><div class="container">
+<p class="up-eyebrow-light">EDITORIAL WORKSPACE · PREVIEW ONLY</p><h1>محرر المحتوى التجريبي — Content Draft Editor</h1>
+<p class="up-lead">يمكنك مراجعة بيانات الدراسات والفرص والأخبار، وتعديل JSON ثم تنزيل النسخة المعدّلة لرفعها إلى GitHub. هذا المحرر لا ينشر تلقائيًا، ولا يطلب كلمة مرور أو رمز GitHub.</p>
+<p class="up-meta-note"><strong>مهم:</strong> هذه أداة لإعداد مسودات الملفات فقط. لا توجد صلاحية كتابة للمستودع ولا نظام دخول أو إدارة مستخدمين. لن تتغير صفحات الموقع حتى تعتمد الملفات عبر GitHub وتحدّث الصفحات المرتبطة عند الحاجة.</p>
+<div class="up-admin-grid">
+<section class="up-admin-pane">
+<h2>اختيار مجموعة البيانات</h2>
+<label for="dataset">المجلد / Dataset<select id="dataset"><option value="opportunities">الفرص الموثقة — opportunities.json</option><option value="updates">الأخبار والمستجدات — updates.json</option><option value="research">سجل الأبحاث — research.json</option></select></label>
+<div class="up-control"><button id="load" type="button" class="up-primary">تحميل البيانات الحالية</button><button id="new" type="button">إنشاء مسودة جديدة</button></div>
+<label for="import">استيراد نسخة JSON من حاسوبك<input id="import" type="file" accept=".json,application/json"></label>
+<label for="json">محرر البيانات / JSON<textarea id="json" rows="19" spellcheck="false" style="min-height:430px;direction:ltr;text-align:left;font-family:ui-monospace,Consolas,monospace;font-size:12px"></textarea></label>
+<div class="up-control"><button type="button" id="verify">التحقق من البيانات</button><button id="export" type="button" class="up-primary">تنزيل JSON المعدّل</button></div>
+<p id="message" role="status" aria-live="polite" style="font-size:13px;line-height:1.7;color:#1b536c"></p>
+</section>
+<section class="up-admin-pane">
+<h2>فحص الجودة قبل النشر</h2>
+<p style="font-size:13px;line-height:1.9">يفحص المحرر بناء JSON وصحة المجالات الأساسية، وروابط HTTPS الرسمية، ويمنع التكرارات البسيطة. لا يحل هذا محل مراجعة المؤلفين والـ DOI والموافقات على النشر.</p>
+<pre id="preview">حدد السجل، ثم اضغط «تحميل البيانات الحالية».</pre>
+<h3>مسار نشر الملف</h3>
+<p style="font-size:13px;line-height:2">1. نزّل الملف بصيغة JSON. 2. افتح مستودع المركز. 3. استبدل الملف المناظر داخل <code>data/</code> على الفرع التجريبي بعد المراجعة. 4. راجع عرض الصفحات. ملفات الدراسات الجديدة تحتاج أيضًا إنشاء صفحاتها وربطها بالموقع.</p>
+<p><a href="https://github.com/salahfaisalsaeedsaeed/namah-rassam-center/tree/preview/site-platform-upgrade-20261113/data" target="_blank" rel="noopener">افتح مجلد بيانات الفرع التجريبي على GitHub ↗</a></p>
+<h3>قواعد التحرير</h3><ul style="font-size:12px;line-height:2"><li>لا تضف أسماء طلاب أو صورًا أو فيديوهات دون الموافقات المطلوبة.</li><li>لا تنشر موعد مسابقة أو خبرًا دون مصدر يمكن التحقق منه.</li><li>لا تُنشئ أسماء مؤلفين أو مؤسسات أو أرقام DOI من التخمين.</li><li>الفرع التجريبي ليس موقع الإنتاج.</li></ul>
+</section>
+</div>
+</div></main><footer class="up-footer"><div class="container">© 2026 Na’mah Rassam Center</div></footer>
+<script>
+(function(){"use strict";
+const root=document.getElementById("dataset"),area=document.getElementById("json"),status=document.getElementById("message"),preview=document.getElementById("preview");
+const filename=()=>root.value==="research"?"research.json":root.value==="updates"?"updates.json":"opportunities.json";
+function tell(message,bad){status.textContent=message;status.style.color=bad?"#9d3742":"#235977"}
+function validate(data){
+const errors=[];if(!data||typeof data!=="object"||Array.isArray(data))errors.push("الجذر يجب أن يكون كائن JSON");
+if(!Number.isInteger(data.schemaVersion)||data.schemaVersion<1)errors.push("schemaVersion يجب أن يكون عددًا صحيحًا موجبًا");
+const key=root.value==="research"?"papers":"items";
+if(!Array.isArray(data[key]))errors.push(key+" يجب أن يكون مصفوفة");
+if(Array.isArray(data[key])){const seen=new Set();for(let i=0;i<data[key].length;i++){const x=data[key][i]||{},name=root.value==="research"?"id":root.value==="opportunities"?"source_url":"title_en";
+const id=x[name];if(!id||typeof id!=="string")errors.push("Entry "+(i+1)+" missing "+name);
+if(typeof id==="string"){if(seen.has(id))errors.push("Duplicated "+name+": "+id);seen.add(id)}
+if(root.value==="opportunities"){if(!x.title_en||!x.title_ar||!x.organization)errors.push("Opportunity "+(i+1)+" needs Arabic/English titles and organization");
+if(!/^https:\/\//.test(String(x.source_url||"")))errors.push("Opportunity "+(i+1)+" requires official HTTPS URL");
+if(x.deadline&&!/^\d{4}-\d{2}-\d{2}$/.test(x.deadline))errors.push("Deadline must be YYYY-MM-DD")}
+if(root.value==="research"&&(!x.doi||!x.title_en||!Array.isArray(x.authors)))errors.push("Paper "+(i+1)+" missing DOI/title/authors");
+}}return errors;
+}
+function check(){let data;try{data=JSON.parse(area.value)}catch(e){tell("JSON غير صالح: "+e.message,true);preview.textContent=e.message;return null}
+const errs=validate(data);preview.textContent=JSON.stringify({dataset:filename(),records:(data.papers||data.items||[]).length,errors:errs,firstEntry:(data.papers||data.items||[])[0]||null},null,2);
+tell(errs.length?"هناك "+errs.length+" أخطاء يجب تصحيحها":"البيانات سليمة بنيويًا؛ راجع صحة محتواها قبل النشر.",errs.length>0);return errs.length?null:data}
+async function load(){try{const response=await fetch("/data/"+filename(),{cache:"no-store"});if(!response.ok)throw Error("HTTP "+response.status);area.value=JSON.stringify(await response.json(),null,2);tell("تم تحميل "+filename());check()}catch(e){tell("تعذّر التحميل: "+e.message,true)}}
+document.getElementById("load").addEventListener("click",load);
+root.addEventListener("change",()=>{area.value="";preview.textContent="";tell("اضغط تحميل البيانات الحالية");});
+document.getElementById("new").addEventListener("click",()=>{area.value=JSON.stringify(root.value==="research"?{schemaVersion:1,papers:[]}:{schemaVersion:1,items:[]},null,2);check()});
+document.getElementById("verify").addEventListener("click",check);
+document.getElementById("import").addEventListener("change",async e=>{const file=e.target.files[0];if(!file)return;if(file.size>2e6){tell("الملف كبير جدًا للمحرر",true);return}area.value=await file.text();check()});
+document.getElementById("export").addEventListener("click",()=>{const data=check();if(!data)return;const blob=new Blob([JSON.stringify(data,null,2)+"\n"],{type:"application/json;charset=utf-8"}),url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download=filename();document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);tell("تم تجهيز الملف: "+filename())});
+load();
+})();
+</script></body></html>
