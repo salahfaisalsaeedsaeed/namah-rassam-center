@@ -5,6 +5,8 @@ on:
     branches: [main]
     paths:
       - 'assets/publications/papers/*.pdf'
+      - 'assets/publications/presentations/*.pdf'
+      - 'assets/events/research-presentation-videos/*.mp4'
       - '.github/workflows/render-publication-covers.yml'
   workflow_dispatch:
 
@@ -60,15 +62,60 @@ jobs:
           assert len(written) == len(files), "The number of previews does not match the number of PDFs"
           print(f"Generated {len(written)} genuine first-page previews")
           PY
-      - name: Commit publication cover images
+      - name: Render first slide of every research PDF presentation
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import fitz
+          from PIL import Image
+
+          source = Path("assets/publications/presentations")
+          output = Path("assets/publications/presentation-covers")
+          output.mkdir(parents=True, exist_ok=True)
+          pdfs = sorted(source.glob("*.pdf"))
+          assert pdfs, "Expected uploaded presentation PDFs"
+          for pdf_path in pdfs:
+              pdf = fitz.open(pdf_path)
+              try:
+                  page = pdf.load_page(0)
+                  scale = min(1.65, 1350 / page.rect.width)
+                  pix = page.get_pixmap(matrix=fitz.Matrix(scale, scale), colorspace=fitz.csRGB, alpha=False)
+                  image = Image.frombytes("RGB", (pix.width, pix.height), pix.samples)
+                  out = output / (pdf_path.stem + ".webp")
+                  image.save(out, "WEBP", quality=84, method=6)
+                  print(f"{pdf_path.name}: {len(pdf)} pages; cover {pix.width}x{pix.height} -> {out.name}")
+              finally:
+                  pdf.close()
+          print(f"Generated {len(pdfs)} presentation cover images")
+          PY
+      - name: Create posters from uploaded research presentation videos
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p assets/events/research-presentation-posters
+          shopt -s nullglob
+          videos=(assets/events/research-presentation-videos/*.mp4)
+          test "${#videos[@]}" -gt 0
+          for video in "${videos[@]}"; do
+            file="${video##*/}"
+            name="${file%.mp4}"
+            poster="assets/events/research-presentation-posters/${name}.jpg"
+            ffmpeg -hide_banner -loglevel error -nostdin -y -ss 1 -i "${video}" -frames:v 1 -vf scale=960:-2 -q:v 3 "${poster}" || \
+              ffmpeg -hide_banner -loglevel error -nostdin -y -i "${video}" -frames:v 1 -vf scale=960:-2 -q:v 3 "${poster}"
+            test -s "${poster}"
+            echo "${video} -> ${poster}"
+          done
+      - name: Commit research media previews and video posters
+
         shell: bash
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add assets/publications/covers/
+          git add assets/publications/covers/ assets/publications/presentation-covers/ assets/events/research-presentation-posters/
           if git diff --cached --quiet; then
             echo "Preview images are already current"
           else
-            git commit -m "Generate first-page previews for published papers"
+            git commit -m "Generate research paper, presentation, and video preview images"
             git push origin HEAD:main
           fi
