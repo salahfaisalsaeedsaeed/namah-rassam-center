@@ -41,3 +41,108 @@
 .pub-rights-symbol{font-size:19px;color:#94713f;line-height:1.4}.pub-rights strong{font-size:13px;color:var(--navy)}.pub-rights p{font-size:12px;line-height:1.95;color:#687b8e;margin:3px 0 0}
 @media(max-width:760px){.publications-section{padding-block:46px 65px}.pub-summary-stats{grid-template-columns:1fr 1fr 1fr}.pub-stat{gap:7px;padding:12px;flex-direction:column;align-items:flex-start}.pub-stat strong{font-size:25px}.pub-entry{grid-template-columns:1fr}.pub-entry-aside{flex-direction:row;align-items:center;gap:16px;padding:13px 18px;border-inline-end:0;border-bottom:3px solid var(--gold)}.pub-entry-year{font-size:23px;margin:0}.pub-kind{margin:0;margin-inline-start:auto}.pub-entry-body{padding:20px}.pub-authors,.pub-conference{grid-template-columns:1fr;gap:2px}.pub-doi{width:100%;margin-inline-start:0}}
 @media(max-width:430px){.pub-stat span{font-size:11px}.pub-years{width:100%}.pub-year-button{flex:1}.pub-paper-title{font-size:18px}.pub-entry-body{padding:17px}.pub-summary-stats{gap:7px}}
+
+
+/* First-page scholarly PDF previews. JS renders only page 1 into the canvas.
+   This keeps the document snapshot integrated in the archive card, with no PDF-view button. */
+.publications-section .pub-entry{
+  grid-template-columns:96px minmax(180px,215px) minmax(0,1fr);
+}
+.pub-preview{
+  margin:0;
+  padding:22px 12px 17px;
+  border-inline-end:1px solid var(--line);
+  background:linear-gradient(180deg,#f3f7fa 0%,#fbfcfd 100%);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:flex-start;
+  min-width:0;
+}
+.pub-preview-paper{
+  width:100%;
+  min-height:253px;
+  padding:8px;
+  border-radius:3px;
+  border:1px solid #d5dfe7;
+  background:#fff;
+  box-shadow:0 3px 12px rgba(16,38,64,.13);
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+}
+.pub-preview-canvas{
+  display:none;
+  width:100%;
+  height:auto;
+  background:#fff;
+}
+.pub-preview-paper.is-ready{
+  min-height:0;
+}
+.pub-preview-paper.is-ready .pub-preview-canvas{
+  display:block;
+}
+.pub-preview-paper.is-ready .pub-preview-loading{
+  display:none;
+}
+.pub-preview-loading{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:11px;
+  width:100%;
+  min-height:225px;
+  color:#6b8093;
+  font-size:11px;
+  line-height:1.6;
+  text-align:center;
+  padding:10px;
+}
+.pub-preview-loading.is-error{
+  color:#77654b;
+  background:#faf7f0;
+}
+.pub-preview-spinner{
+  display:block;
+  width:23px;
+  height:23px;
+  border:2px solid #d4e0e9;
+  border-top-color:var(--gold);
+  border-radius:50%;
+  animation:pub-preview-spin .9s linear infinite;
+}
+.pub-preview-loading.is-error .pub-preview-spinner{
+  display:none;
+}
+.pub-preview figcaption{
+  margin-top:12px;
+  font-size:11px;
+  font-weight:700;
+  line-height:1.5;
+  color:#6b8093;
+  text-align:center;
+}
+@keyframes pub-preview-spin{to{transform:rotate(360deg)}}
+@media (max-width:1030px) and (min-width:761px){
+  .publications-section .pub-entry{grid-template-columns:82px minmax(140px,180px) minmax(0,1fr)}
+  .pub-preview{padding:18px 9px}
+  .pub-entry-body{padding:22px 20px}
+  .pub-entry-aside{padding-inline:12px}
+}
+@media (max-width:760px){
+  .publications-section .pub-entry{grid-template-columns:minmax(0,1fr)}
+  .pub-preview{
+    border-inline-end:0;
+    border-bottom:1px solid var(--line);
+    padding:20px;
+  }
+  .pub-preview-paper{width:min(230px,100%);min-height:230px}
+  .pub-preview figcaption{margin-top:8px}
+}
+@media (prefers-reduced-motion:reduce){
+  .pub-preview-spinner{animation:none}
+}
