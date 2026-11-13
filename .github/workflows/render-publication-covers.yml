@@ -1,0 +1,74 @@
+name: Generate first-page publication previews
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'assets/publications/papers/*.pdf'
+      - '.github/workflows/render-publication-covers.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publication-covers-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out published research files
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Configure Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install PDF renderer
+        run: python -m pip install --disable-pip-version-check pymupdf pillow
+      - name: Render exact page one to optimized WebP
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import fitz
+          from PIL import Image
+          import io
+
+          source = Path("assets/publications/papers")
+          destination = Path("assets/publications/covers")
+          destination.mkdir(parents=True, exist_ok=True)
+          files = sorted(source.glob("*.pdf"))
+          assert files, "No source PDFs found"
+          written = set()
+          for path in files:
+              target = destination / (path.stem + ".webp")
+              doc = fitz.open(path)
+              try:
+                  page = doc.load_page(0)
+                  scale = min(1.65, 1300 / page.rect.width)
+                  pix = page.get_pixmap(matrix=fitz.Matrix(scale, scale), colorspace=fitz.csRGB, alpha=False)
+                  img = Image.frombytes("RGB", (pix.width, pix.height), pix.samples)
+                  img.save(target, format="WEBP", quality=84, method=6)
+                  written.add(target.name)
+                  print(f"{path.name} -> {target.name} ({pix.width}x{pix.height}, {target.stat().st_size} bytes)")
+              finally:
+                  doc.close()
+          assert len(written) == len(files), "The number of previews does not match the number of PDFs"
+          print(f"Generated {len(written)} genuine first-page previews")
+          PY
+      - name: Commit publication cover images
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/publications/covers/
+          if git diff --cached --quiet; then
+            echo "Preview images are already current"
+          else
+            git commit -m "Generate first-page previews for published papers"
+            git push origin HEAD:main
+          fi
